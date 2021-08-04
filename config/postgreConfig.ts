@@ -9,4 +9,3 @@ const pg = new Pool({
 })
 
 export default pg
-//pool.query(`select now()`,(err, res) => console.log(err, res))
