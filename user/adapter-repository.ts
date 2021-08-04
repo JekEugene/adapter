@@ -1,3 +1,4 @@
+import { IUser } from './user.interface';
 import { ICreateUserDto } from './dto/create-user.dto';
 import { IUserRepository } from './user-repository.interface';
 import { MongoUserRepository } from './user.mongo.repository';
@@ -23,5 +24,13 @@ export class AdapterUserRepository implements IUserRepository {
 
     deleteUser(id: number): void {
         return this.database.deleteUser(id)
+    }
+
+    async getAllUsers(): Promise<IUser[]> {
+        return await this.database.getAllUsers()
+    }
+
+    async getUser(id: number): Promise<IUser> {
+        return await this.database.getUser(id)
     }
 }
