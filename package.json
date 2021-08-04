@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && ts-node ./index.ts",
+    "dev": "npm run build && nodemon ./index.ts",
+    "build": "tsc -p .",
+    "precommit": "lint-staged"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
