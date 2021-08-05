@@ -10,9 +10,9 @@ export class PostgreUserRepository implements IUserRepository {
             VALUES ($1, $2);`, [user.login, user.password])
     }
 
-    deleteUser(id: number): void {
+    deleteUser(id: string): void {
         pg.query(`DELETE FROM users
-        WHERE id = $1;`, [id])
+        WHERE id = $1;`, [+id])
     }
 
     async getAllUsers(): Promise<IUser[]> {
@@ -21,8 +21,8 @@ export class PostgreUserRepository implements IUserRepository {
         return users
     }
 
-    async getUser(id: number): Promise<IUser> {
-        const res = await pg.query(`select * from users where id = $1`, [id])
+    async getUser(id: string): Promise<IUser> {
+        const res = await pg.query(`select * from users where id = $1`, [+id])
         const user: IUser = res.rows[0]
         return user
     }

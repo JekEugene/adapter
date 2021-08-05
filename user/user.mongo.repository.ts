@@ -9,19 +9,20 @@ import User from './user.model';
 export class MongoUserRepository implements IUserRepository {
 
     async createUser(user: ICreateUserDto): Promise<void> {
-        
+        User.create(user)
     }
 
-    async deleteUser(id: number): Promise<void> {
-        
+    async deleteUser(id: string): Promise<void> {
+        let res = await User.deleteOne({_id: new ObjectId(id)})
+        console.log(res);
     }
 
     async getAllUsers(): Promise<IUser[]> {
         const users: IUser[] = await User.find({})
         return users
     }
-    async getUser(id: number): Promise<IUser> {
-        const user: IUser = undefined
+    async getUser(id: string): Promise<IUser> {
+        const user: IUser = await User.findOne({_id: new ObjectId(id)})
         return user
     }
 }
