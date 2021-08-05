@@ -1,15 +1,18 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import connectDB from "./config/mongoConfig";
 connectDB()
 import { ICreateUserDto } from './user/dto/create-user.dto';
 import { AdapterUserRepository } from './user/adapter-repository';
 
-const adapter = new AdapterUserRepository(`postgre`)
+const adapter = new AdapterUserRepository(`mongo`)
 const user: ICreateUserDto = {
-    login: 'user3',
+    login: 'user4',
     password: `qwerty`
 };
 (async () => {
-    //adapter.createUser(user)
+    console.log('work');
+    await adapter.createUser(user)
     //adapter.deleteUser('5')
     const users = await adapter.getAllUsers()
     //const users = await adapter.getUser('5')

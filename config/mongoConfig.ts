@@ -5,11 +5,14 @@ const connectDB = async () => {
         const options: ConnectionOptions = {
             useNewUrlParser: true,
             useCreateIndex: true,
-            useFindAndModify: false,
+            //useFindAndModify: false,
             useUnifiedTopology: true,
         };
-        await connect('mongodb://localhost:27017/adapter', options);
+        console.log('con1' + process.env.MONGODB_HOST);
+        await connect(`mongodb://${process.env.MONGODB_HOST}:27017/adapter`, options);
+        console.log('con2');
     } catch (err) {
+        console.log('confail');
         console.error(err.message);
         process.exit(1);
     }

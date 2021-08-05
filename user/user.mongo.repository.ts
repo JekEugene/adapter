@@ -8,7 +8,8 @@ import User from './user.model';
 
 export class MongoUserRepository implements IUserRepository {
 
-    async createUser(user: ICreateUserDto): Promise<void> {
+    createUser(user: ICreateUserDto): void {
+        console.log('1');
         User.create(user)
     }
 
@@ -18,6 +19,7 @@ export class MongoUserRepository implements IUserRepository {
     }
 
     async getAllUsers(): Promise<IUser[]> {
+        console.log('2');
         const users: IUser[] = await User.find({})
         return users
     }

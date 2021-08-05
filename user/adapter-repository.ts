@@ -16,11 +16,12 @@ export class AdapterUserRepository implements IUserRepository {
             this.database = new MongoUserRepository()
         } else {
             console.log(`incorrect db`)
+            process.exit()
         }
     }
 
     createUser(user: ICreateUserDto): void {
-        return this.database.createUser(user)
+        this.database.createUser(user)
     }
 
     deleteUser(id: string): void {
