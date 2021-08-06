@@ -5,13 +5,12 @@ connectDB()
 import { ICreateUserDto } from './user/dto/create-user.dto';
 import { AdapterUserRepository } from './user/adapter-repository';
 
-const adapter = new AdapterUserRepository(`mongo`)
+const adapter = new AdapterUserRepository(`postgre`)
 const user: ICreateUserDto = {
     login: 'user4',
     password: `qwerty`
 };
 (async () => {
-    console.log('work');
     await adapter.createUser(user)
     //adapter.deleteUser('5')
     const users = await adapter.getAllUsers()

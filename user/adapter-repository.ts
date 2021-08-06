@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import { IUser } from './user.interface';
 import { ICreateUserDto } from './dto/create-user.dto';
 import { IUserRepository } from './user-repository.interface';

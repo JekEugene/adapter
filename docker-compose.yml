@@ -9,32 +9,22 @@ services:
         depends_on:
             - 'postgres'
             - 'mongo'
-        # env_file: 
-        #     - ./.env
         links:
             - mongo
     postgres:
         container_name: postgres
         image: postgres:13.3
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_HOST=db
-            - POSTGRES_DATABASE=adapter
-            - POSTGRES_PASSWORD=root
-            - POSTGRES_PORT=5432
         ports: 
             - "5432:5432"
+        volumes: 
+            - pgdata:/var/lib/postgresql/data
     mongo:
         container_name: mongo
         image: mongo
         volumes: 
             - mongo-db:/data/db
-        # env_file: 
-        #     - .env
-        # environment: 
-        #     - MONGO_INITDB_ROOT_USERNAME=root
-        #     - MONGO_INITDB_ROOT_PASSWORD=root
         ports: 
             - "27017:27017"
 volumes:
     mongo-db:
+    pgdata:
