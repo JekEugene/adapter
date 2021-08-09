@@ -1,23 +1,10 @@
 import { IUser } from './user.interface';
 import { ICreateUserDto } from './dto/create-user.dto';
 import { IUserRepository } from './user-repository.interface';
-import { MongoUserRepository } from './user.mongo.repository';
-import { PostgreUserRepository } from './user.postgre.repository';
 
 export class AdapterUserRepository implements IUserRepository {
     
-    private database: IUserRepository
-    
-    constructor(db: string) {
-        if(db === `postgre`) {
-            this.database = new PostgreUserRepository()
-        } else if (db === `mongo`) {
-            this.database = new MongoUserRepository()
-        } else {
-            console.log(`incorrect db`)
-            process.exit()
-        }
-    }
+    constructor(private readonly database: IUserRepository) {}
 
     createUser(user: ICreateUserDto): void {
         this.database.createUser(user)
