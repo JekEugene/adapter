@@ -4,8 +4,14 @@ import connectDB from "./config/mongoConfig";
 connectDB()
 import { ICreateUserDto } from './user/dto/create-user.dto';
 import { AdapterUserRepository } from './user/adapter-repository';
+import { PostgreUserRepository } from './user/user.postgre.repository';
+import { MongoUserRepository } from './user/user.mongo.repository';
 
-const adapter = new AdapterUserRepository(`postgre`)
+const database = process.env.DATABASE === 'mongo'
+    ? new MongoUserRepository()
+    : new PostgreUserRepository()
+
+const adapter = new AdapterUserRepository(database)
 const user: ICreateUserDto = {
     login: 'user4',
     password: `qwerty`
